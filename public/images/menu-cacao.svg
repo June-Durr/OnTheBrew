@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 560" role="img" aria-labelledby="title desc">
+  <title id="title">Iced cacao illustration</title>
+  <desc id="desc">A branded illustration of a cacao drink topped with cream.</desc>
+  <defs><linearGradient id="cacao" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#d5a77c"/><stop offset="1" stop-color="#704f41"/></linearGradient></defs>
+  <ellipse cx="210" cy="520" rx="132" ry="22" fill="#3a2018" opacity=".15"/>
+  <path d="M105 177h210l-22 311c-2 24-21 40-43 40h-80c-22 0-41-16-43-40z" fill="url(#cacao)" stroke="#06386e" stroke-width="8"/>
+  <path d="M118 190c8-40 36-56 60-48 17-38 58-39 76-8 31-17 64 5 65 42 0 18-13 29-33 29H146c-17 0-29-3-28-15z" fill="#f7f3ea" stroke="#06386e" stroke-width="7"/>
+  <path d="M136 195c34-18 62 13 91-5 29-18 56 8 80-4" fill="none" stroke="#704f41" stroke-width="9" stroke-linecap="round"/>
+  <g fill="#b9dff5" opacity=".45"><path d="M145 245l46-5 7 53-46 5z"/><path d="M225 232l50 5-5 52-50-5z"/><path d="M178 315l48-3 4 52-48 3z"/></g>
+  <path d="M122 402c58-30 96 28 180-5" fill="none" stroke="#f7f3ea" stroke-width="14" opacity=".8"/>
+  <text x="210" y="466" text-anchor="middle" fill="#f7f3ea" font-family="Georgia,serif" font-size="28" font-weight="bold">OTB</text>
+  <path d="M267 23l17 5-56 213-18-5z" fill="#121212"/>
+</svg>

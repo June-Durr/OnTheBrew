@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 560" role="img" aria-labelledby="title desc">
+  <title id="title">Iced coffee illustration</title>
+  <desc id="desc">A branded illustration of iced Guatemalan coffee with cream.</desc>
+  <defs>
+    <linearGradient id="coffee" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#704f41"/><stop offset="1" stop-color="#3a2018"/></linearGradient>
+    <linearGradient id="cream" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7f3ea"/><stop offset="1" stop-color="#d8b99a"/></linearGradient>
+  </defs>
+  <ellipse cx="218" cy="518" rx="130" ry="22" fill="#3a2018" opacity=".15"/>
+  <path d="M112 145h218l-25 343c-2 23-20 39-42 39h-84c-22 0-40-16-42-39z" fill="url(#coffee)" stroke="#06386e" stroke-width="8"/>
+  <path d="M130 240c38-44 83 36 125-11 24-27 47-10 66 9l-18 242H140z" fill="url(#cream)" opacity=".9"/>
+  <path d="M130 343c45-35 74 32 113-8 26-27 48-18 68-2" fill="none" stroke="#704f41" stroke-width="22" opacity=".75"/>
+  <g fill="#b9dff5" opacity=".55"><path d="M151 174l44-8 13 52-44 8z"/><path d="M224 167l51 4-5 49-51-4z"/><path d="M176 247l44-6 8 47-44 6z"/></g>
+  <ellipse cx="221" cy="145" rx="113" ry="25" fill="#f7f3ea" stroke="#06386e" stroke-width="8"/>
+  <ellipse cx="221" cy="146" rx="90" ry="14" fill="#704f41"/>
+  <path d="M278 29l18 2-37 209-18-3z" fill="#121212"/>
+  <path d="M177 400c31-17 64 18 88-5" fill="none" stroke="#0057a8" stroke-width="6" stroke-linecap="round"/>
+  <text x="221" y="450" text-anchor="middle" fill="#0057a8" font-family="Georgia,serif" font-size="28" font-weight="bold">OTB</text>
+  <g fill="#704f41"><ellipse cx="82" cy="469" rx="15" ry="9" transform="rotate(23 82 469)"/><ellipse cx="63" cy="491" rx="15" ry="9" transform="rotate(-18 63 491)"/><ellipse cx="96" cy="500" rx="15" ry="9" transform="rotate(43 96 500)"/></g>
+</svg>
