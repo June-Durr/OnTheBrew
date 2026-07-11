@@ -16,9 +16,9 @@ export default function Navbar() {
           <ul className="flex items-center gap-8">
             {content.nav.links.map((link) => (
               <li key={link.label}>
-                <a className="text-sm font-bold uppercase tracking-[0.12em] text-brand-ink hover:text-brand-primary" href={link.href}>
+                <Link className="text-sm font-bold uppercase tracking-[0.12em] text-brand-ink hover:text-brand-primary" to={link.href}>
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -43,13 +43,13 @@ export default function Navbar() {
           <ul className="mx-auto flex max-w-7xl flex-col">
             {content.nav.links.map((link) => (
               <li key={link.label}>
-                <a
-                  href={link.href}
+                <Link
+                  to={link.href}
                   onClick={() => setIsOpen(false)}
                   className="flex min-h-12 items-center border-b border-brand-line text-base font-bold uppercase tracking-[0.12em] last:border-0"
                 >
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

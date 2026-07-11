@@ -1,3 +1,5 @@
+const assetPath = (path) => `${import.meta.env.BASE_URL}${path}`
+
 export const content = {
   business: {
     name: 'On The Brew Coffee Company',
@@ -32,7 +34,7 @@ export const content = {
         id: 'coffee',
         label: 'Coffee',
         subtitle: 'Signature Drinks',
-        image: '/images/menu-coffee.svg',
+        image: assetPath('images/menu-coffee.svg'),
         imageAlt: 'Illustrated iced coffee with cream swirling through the glass',
         items: [
           { name: 'Café de Olla', description: 'Espresso, piloncillo, cinnamon and orange', featured: true },
@@ -45,7 +47,7 @@ export const content = {
         id: 'non-coffee',
         label: 'Non-Coffee',
         subtitle: 'Fresh & Comforting',
-        image: '/images/menu-cacao.svg',
+        image: assetPath('images/menu-cacao.svg'),
         imageAlt: 'Illustrated iced cacao drink topped with cream',
         items: [
           { name: 'Guatemalan Cacao', description: 'Deep cacao, warm spice and steamed milk', featured: true },
@@ -58,7 +60,7 @@ export const content = {
         id: 'food',
         label: 'Food',
         subtitle: 'From the Pastry Case',
-        image: '/images/menu-pastry.svg',
+        image: assetPath('images/menu-pastry.svg'),
         imageAlt: 'Illustrated golden pastry with a coffee leaf garnish',
         items: [
           { name: 'Guava & Cheese Pastelito', description: 'Flaky pastry with sweet guava and cream cheese', featured: false },
