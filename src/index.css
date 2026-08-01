@@ -11,6 +11,17 @@ body {
   @apply bg-brand-bg font-sans text-brand-ink;
 }
 
+#hero,
+#difference,
+#story,
+#menu,
+#brewmobile,
+#proof,
+#visit,
+#footer {
+  scroll-margin-top: 64px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

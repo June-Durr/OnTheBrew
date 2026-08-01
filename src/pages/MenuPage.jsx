@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
 import { content } from '../content'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
+import Button from '../components/Button'
 
 function MenuChapter({ category, index }) {
   if (!category.items.length) return null
@@ -9,16 +10,17 @@ function MenuChapter({ category, index }) {
   const imageFirst = index % 2 !== 0
 
   return (
-    <section id={category.id} className="scroll-mt-24 py-14 sm:py-20">
-      <div className="grid items-center gap-9 md:grid-cols-2 md:gap-16">
-        <div className={imageFirst ? 'md:order-2' : ''}>
-          <div className="inline-flex min-h-12 items-center bg-brand-roast px-6 py-2 text-white">
-            <h2 className="font-display text-2xl uppercase tracking-[0.08em] sm:text-3xl">{category.label}</h2>
-          </div>
-          {category.subtitle && (
-            <p className="mb-7 mt-5 font-display text-xl font-bold text-brand-espresso">{category.subtitle}</p>
-          )}
+    <section id={category.id} className="scroll-mt-24">
+      <div className="-mx-5 bg-brand-espresso px-6 py-5 text-center">
+        <h2 className="font-display font-bold uppercase text-2xl tracking-wide text-white">{category.label}</h2>
+        <div className="mx-auto my-2 h-px w-16 bg-brand-accent" />
+        {category.subtitle && (
+          <p className="font-sans text-sm italic text-brand-bg/70">{category.subtitle}</p>
+        )}
+      </div>
 
+      <div className="grid items-center gap-9 py-14 sm:py-20 md:grid-cols-2 md:gap-16">
+        <div className={imageFirst ? 'md:order-2' : ''}>
           <div className="relative ml-1 border-l border-brand-roast/70 pl-7">
             {category.items.map((item) => (
               <article key={item.name} className="relative pb-6 last:pb-0">
@@ -48,16 +50,46 @@ function MenuChapter({ category, index }) {
 export default function MenuPage() {
   const categories = content.menu.categories.filter((category) => category.items.length)
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <>
       <Navbar />
       <main>
         <header className="relative overflow-hidden bg-brand-primary px-5 py-16 text-white sm:py-24">
-          <div className="absolute -right-16 -top-20 h-64 w-64 rounded-full border border-brand-accent/40" />
-          <div className="absolute -right-6 -top-10 h-40 w-40 rounded-full border border-brand-accent/40" />
+          <div
+            className="pointer-events-none absolute -right-16 top-1/2 h-[140%] w-auto -translate-y-1/2 rotate-6 text-brand-accent opacity-10"
+            aria-hidden="true"
+          >
+            <svg
+              viewBox="0 0 220 480"
+              className="h-full w-auto"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M100 470 C 60 380 140 300 90 210 C 55 140 145 80 100 10" />
+              <path d="M85 430 Q65 424 51 406 Q71 410 85 430 Z" />
+              <path d="M70 380 Q90 374 104 356 Q84 360 70 380 Z" />
+              <path d="M95 330 Q75 324 61 306 Q81 310 95 330 Z" />
+              <path d="M115 280 Q135 274 149 256 Q129 260 115 280 Z" />
+              <path d="M95 230 Q75 224 61 206 Q81 210 95 230 Z" />
+              <path d="M115 180 Q135 174 149 156 Q129 160 115 180 Z" />
+              <path d="M130 130 Q110 124 96 106 Q116 110 130 130 Z" />
+              <path d="M115 80 Q135 74 149 56 Q129 60 115 80 Z" />
+              <circle cx="90" cy="425" r="6" />
+              <circle cx="100" cy="325" r="5" />
+              <circle cx="90" cy="225" r="6" />
+              <circle cx="125" cy="125" r="5" />
+            </svg>
+          </div>
           <div className="relative mx-auto max-w-6xl">
             <p className="mb-3 text-sm font-bold uppercase tracking-[0.24em] text-brand-accent">On The Brew Coffee Company</p>
-            <h1 className="max-w-3xl font-display text-5xl uppercase leading-[0.95] tracking-[0.03em] sm:text-7xl">{content.menu.title}</h1>
+            <h1 className="max-w-3xl font-display font-bold text-5xl uppercase leading-[0.95] tracking-[0.03em] sm:text-7xl">{content.menu.title}</h1>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-white/90 sm:text-lg">{content.menu.introduction}</p>
           </div>
         </header>
@@ -85,21 +117,24 @@ export default function MenuPage() {
         <section className="bg-brand-espresso px-5 py-16 text-white">
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-sm font-bold uppercase tracking-[0.22em] text-brand-accent">Come find your favorite</p>
-            <h2 className="mt-3 font-display text-4xl uppercase">Visit On The Brew</h2>
+            <h2 className="mt-3 font-display font-bold text-4xl uppercase">Visit On The Brew</h2>
             <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/85">{content.visit.address}</p>
             <p className="mt-2 text-base text-white/85">{content.visit.hours}</p>
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-              <a
-                href={content.visit.directionsUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex min-h-12 items-center justify-center bg-white px-7 py-3 font-bold uppercase tracking-[0.12em] text-brand-primary hover:bg-brand-bg"
-              >
-                Get directions
-              </a>
-              <Link to="/" className="inline-flex min-h-12 items-center justify-center border border-white px-7 py-3 font-bold uppercase tracking-[0.12em] text-white hover:bg-white hover:text-brand-espresso">
-                Return home
-              </Link>
+              <div className="sm:flex-1">
+                <Button variant="light" href={content.visit.directionsUrl} external>
+                  Get directions
+                </Button>
+              </div>
+              <div className="sm:flex-1">
+                <Button
+                  variant="outline"
+                  href="/"
+                  className="text-white border-white hover:bg-white hover:text-brand-espresso"
+                >
+                  Return home
+                </Button>
+              </div>
             </div>
           </div>
         </section>
