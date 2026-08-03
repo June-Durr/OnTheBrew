@@ -12,18 +12,20 @@ function MenuChapter({ category, index }) {
   return (
     <section id={category.id} className="scroll-mt-24">
       <div className="-mx-5 bg-brand-espresso px-6 py-5 text-center">
-        <h2 className="font-display font-bold uppercase text-2xl tracking-wide text-white">{category.label}</h2>
-        <div className="mx-auto my-2 h-px w-16 bg-brand-accent" />
-        {category.subtitle && (
-          <p className="font-sans text-sm italic text-brand-bg/70">{category.subtitle}</p>
-        )}
+        <div className="mx-auto w-full max-w-[440px]">
+          <h2 className="font-display font-bold uppercase text-2xl tracking-wide text-white">{category.label}</h2>
+          <div className="mx-auto my-2 h-px w-16 bg-brand-accent" />
+          {category.subtitle && (
+            <p className="font-sans text-sm italic text-brand-bg/70">{category.subtitle}</p>
+          )}
+        </div>
       </div>
 
-      <div className="grid items-center gap-9 py-14 sm:py-20 md:grid-cols-2 md:gap-16">
+      <div className="mx-auto grid w-full max-w-[440px] items-center gap-9 py-14 sm:py-16 md:max-w-6xl md:grid-cols-2 md:gap-16">
         <div className={imageFirst ? 'md:order-2' : ''}>
-          <div className="relative ml-1 border-l border-brand-roast/70 pl-7">
+          <div className="relative ml-1 flex flex-col gap-6 border-l border-brand-roast/70 pl-7">
             {category.items.map((item) => (
-              <article key={item.name} className="relative pb-6 last:pb-0">
+              <article key={item.name} className="relative">
                 <span className="absolute -left-[1.98rem] top-2 h-2.5 w-2.5 rounded-full bg-brand-roast" />
                 <h3 className="font-display text-xl font-bold leading-tight text-brand-espresso sm:text-2xl">{item.name}</h3>
                 <p className="mt-1 text-base leading-snug text-brand-ink/75">{item.description}</p>
@@ -58,7 +60,7 @@ export default function MenuPage() {
     <>
       <Navbar />
       <main>
-        <header className="relative overflow-hidden bg-brand-primary px-5 py-16 text-white sm:py-24">
+        <header className="relative overflow-hidden bg-brand-primary px-5 py-16 text-white">
           <div
             className="pointer-events-none absolute -right-16 top-1/2 h-[140%] w-auto -translate-y-1/2 rotate-6 text-brand-accent opacity-10"
             aria-hidden="true"
@@ -87,7 +89,7 @@ export default function MenuPage() {
               <circle cx="125" cy="125" r="5" />
             </svg>
           </div>
-          <div className="relative mx-auto max-w-6xl">
+          <div className="relative mx-auto w-full max-w-[440px]">
             <p className="mb-3 text-sm font-bold uppercase tracking-[0.24em] text-brand-accent">On The Brew Coffee Company</p>
             <h1 className="max-w-3xl font-display font-bold text-5xl uppercase leading-[0.95] tracking-[0.03em] sm:text-7xl">{content.menu.title}</h1>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-white/90 sm:text-lg">{content.menu.introduction}</p>
@@ -95,7 +97,7 @@ export default function MenuPage() {
         </header>
 
         <nav aria-label="Menu categories" className="border-b border-brand-line bg-brand-surface px-5">
-          <ul className="mx-auto flex max-w-6xl gap-2 overflow-x-auto py-3">
+          <ul className="mx-auto flex w-full max-w-[440px] gap-2 overflow-x-auto py-3">
             {categories.map((category) => (
               <li key={category.id} className="shrink-0">
                 <a href={`#${category.id}`} className="flex min-h-11 items-center px-4 text-sm font-bold uppercase tracking-[0.12em] text-brand-primary hover:bg-brand-bg">
@@ -107,7 +109,7 @@ export default function MenuPage() {
         </nav>
 
         <div className="bg-brand-bg px-5">
-          <div className="mx-auto max-w-6xl divide-y divide-brand-roast/20">
+          <div className="mx-auto w-full max-w-[440px] divide-y divide-brand-roast/20 md:max-w-6xl">
             {categories.map((category, index) => (
               <MenuChapter key={category.id} category={category} index={index} />
             ))}
@@ -115,7 +117,7 @@ export default function MenuPage() {
         </div>
 
         <section className="bg-brand-espresso px-5 py-16 text-white">
-          <div className="mx-auto max-w-3xl text-center">
+          <div className="mx-auto w-full max-w-[440px] text-center">
             <p className="text-sm font-bold uppercase tracking-[0.22em] text-brand-accent">Come find your favorite</p>
             <h2 className="mt-3 font-display font-bold text-4xl uppercase">Visit On The Brew</h2>
             <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/85">{content.visit.address}</p>

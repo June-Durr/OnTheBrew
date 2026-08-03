@@ -4,15 +4,39 @@ import Reveal from './Reveal'
 import Button from './Button'
 
 export default function Visit() {
+  const todayIndex = new Date().getDay()
+
   return (
     <section
       id="visit"
       className="w-full bg-brand-bg px-5 py-16 text-center"
     >
-      <Reveal className="w-full space-y-6">
-        <h2 className="text-3xl font-display font-bold uppercase tracking-wide text-brand-primary">{content.visit.heading}</h2>
+      <Reveal className="space-y-6">
+        <h2 className="text-2xl sm:text-3xl font-display font-bold uppercase tracking-wide text-brand-primary">{content.visit.heading}</h2>
         <p className="text-base leading-relaxed text-brand-ink">{content.visit.address}</p>
-        <p className="text-base leading-relaxed text-brand-ink">{content.visit.hours}</p>
+        <div>
+          <p className="font-sans text-xs uppercase tracking-widest text-brand-roast">Open Late Every Day</p>
+          <div className="mx-auto mt-2 w-full max-w-xs">
+            {content.visit.hours.map((entry, index) => {
+              const isToday = index === todayIndex
+              return (
+                <div
+                  key={entry.day}
+                  className={`flex items-center justify-between py-2 ${
+                    index !== content.visit.hours.length - 1 ? 'border-b border-brand-line/50' : ''
+                  }`}
+                >
+                  <span className={`font-sans text-sm ${isToday ? 'font-semibold text-brand-primary' : 'text-brand-ink'}`}>
+                    {entry.day}
+                  </span>
+                  <span className={`font-sans text-sm ${isToday ? 'font-semibold text-brand-primary' : 'text-brand-ink/70'}`}>
+                    {entry.time}
+                  </span>
+                </div>
+              )
+            })}
+          </div>
+        </div>
 
         <div className="flex flex-col gap-3">
           <Button variant="primary" href="#">

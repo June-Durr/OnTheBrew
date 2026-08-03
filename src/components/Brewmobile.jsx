@@ -13,8 +13,8 @@ export default function Brewmobile() {
       id="brewmobile"
       className="w-full bg-brand-primary px-5 py-16 text-center"
     >
-      <Reveal className="w-full">
-        <h2 className="text-3xl font-display font-bold uppercase tracking-wide text-white">{content.brewmobile.heading}</h2>
+      <Reveal>
+        <h2 className="text-2xl sm:text-3xl font-display font-bold uppercase tracking-wide text-white">{content.brewmobile.heading}</h2>
         <p className="mt-4 font-display font-bold text-2xl text-white">{content.brewmobile.hook}</p>
 
         <motion.div

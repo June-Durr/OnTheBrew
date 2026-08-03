@@ -12,8 +12,8 @@ export default function Proof() {
       id="proof"
       className="w-full bg-brand-roast px-5 py-16 text-center"
     >
-      <Reveal className="w-full space-y-6">
-        <h2 className="text-3xl font-display font-bold uppercase tracking-wide text-white">{content.proof.heading}</h2>
+      <Reveal className="space-y-6">
+        <h2 className="text-2xl sm:text-3xl font-display font-bold uppercase tracking-wide text-white">{content.proof.heading}</h2>
 
         <motion.div
           className="flex flex-col gap-4 text-left"

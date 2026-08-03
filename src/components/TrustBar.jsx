@@ -44,7 +44,7 @@ export default function TrustBar() {
 
   return (
     <section className="w-full bg-brand-navy px-6 py-16">
-      <Reveal className="mx-auto flex max-w-5xl flex-col items-center gap-12 text-center" variants={stagger}>
+      <Reveal className="flex flex-col items-center gap-12 text-center" variants={stagger}>
         {content.trustBar.map((item) => (
           <motion.div key={item.heading} className="flex flex-col items-center gap-3" variants={blockVariants}>
             {icons[item.icon]}

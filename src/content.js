@@ -14,7 +14,7 @@ export const content = {
   },
   hero: {
     headline: 'Guatemalan Coffee, Roasted With Heart',
-    subline: 'Small-batch beans from Cecilia and Jonathan’s family farms, brewed fresh in Stamford.',
+    subline: 'Small-batch beans from Cecilia and Jonathan’s family farms, brewed fresh in Stamford. Open until 8 PM most days.',
     cta: 'Find Us',
   },
   difference: {
@@ -122,7 +122,15 @@ export const content = {
   visit: {
     heading: 'Come Find Us',
     address: '100 Greyrock Place, Level 3 Green South, Stamford, CT',
-    hours: '[ Hours TBD ]',
+    hours: [
+      { day: 'Sunday', time: '11:00 AM – 7:00 PM' },
+      { day: 'Monday', time: '8:30 AM – 8:00 PM' },
+      { day: 'Tuesday', time: '8:30 AM – 8:00 PM' },
+      { day: 'Wednesday', time: '8:30 AM – 8:00 PM' },
+      { day: 'Thursday', time: '8:30 AM – 8:00 PM' },
+      { day: 'Friday', time: '8:30 AM – 8:00 PM' },
+      { day: 'Saturday', time: '8:30 AM – 8:00 PM' },
+    ],
     directionsUrl: 'https://www.google.com/maps/search/?api=1&query=100+Greyrock+Place+Stamford+CT',
     cta: 'Get Directions',
     videoHeading: 'Finding Us Inside the Mall',

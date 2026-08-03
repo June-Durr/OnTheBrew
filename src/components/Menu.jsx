@@ -14,8 +14,8 @@ export default function Menu() {
   const featuredImage = content.menu.categories.find((category) => category.image)
 
   return (
-    <section id="menu" className="overflow-hidden bg-brand-bg px-5 py-20">
-      <Reveal className="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-2 md:gap-16">
+    <section id="menu" className="overflow-hidden bg-brand-bg px-5 py-16">
+      <Reveal className="grid items-center gap-10 md:max-w-6xl md:grid-cols-2 md:gap-16">
         <div className="relative min-h-80" aria-hidden={!featuredImage}>
           <div className="absolute left-2 top-4 h-52 w-52 rounded-full bg-brand-accent/20" />
           {featuredImage && (
@@ -30,7 +30,7 @@ export default function Menu() {
 
         <div>
           <p className="mb-3 text-sm font-bold uppercase tracking-[0.22em] text-brand-roast">A glimpse of the menu</p>
-          <h2 className="font-display font-bold text-4xl uppercase leading-tight tracking-wide text-brand-primary sm:text-5xl">
+          <h2 className="font-display font-bold text-2xl uppercase leading-tight tracking-wide text-brand-primary sm:text-3xl">
             {content.menu.title}
           </h2>
           <p className="mt-4 max-w-xl text-base leading-relaxed font-sans text-brand-ink">{content.menu.introduction}</p>

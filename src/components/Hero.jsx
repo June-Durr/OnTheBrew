@@ -8,8 +8,8 @@ export default function Hero() {
       id="hero"
       className="relative flex h-[100dvh] w-full flex-col items-center justify-center bg-brand-primary px-5 py-16 text-center"
     >
-      <Reveal className="w-full space-y-6">
-        <h1 className="text-4xl font-display font-bold uppercase tracking-wide text-white">{content.hero.headline}</h1>
+      <Reveal className="space-y-6">
+        <h1 className="text-4xl sm:text-5xl font-display font-bold uppercase tracking-wide text-white">{content.hero.headline}</h1>
         <p className="text-sm uppercase tracking-widest text-brand-accent">{content.hero.subline}</p>
         <Button variant="accent" href="#visit">
           {content.hero.cta}

@@ -5,12 +5,12 @@ export default function Footer() {
   return (
     <footer
       id="footer"
-      className="w-full bg-brand-navy px-5 py-16 text-center text-brand-bg"
+      className="w-full bg-brand-navy px-5 py-12 text-center text-brand-bg"
     >
-      <Reveal className="w-full space-y-6">
+      <Reveal className="space-y-6">
         <p className="text-lg font-semibold">{content.business.name}</p>
 
-        <ul className="flex flex-col items-center gap-6">
+        <ul className="flex flex-col items-center gap-4">
           {content.footer.social.map((item) => (
             <li key={item.label}>
               <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-base">

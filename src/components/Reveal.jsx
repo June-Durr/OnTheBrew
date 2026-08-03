@@ -1,12 +1,12 @@
 import { motion, useReducedMotion } from 'motion/react'
 import { fadeUp, reducedFadeUp } from '../lib/motion'
 
-export default function Reveal({ className, children, variants, ...props }) {
+export default function Reveal({ className = '', children, variants, ...props }) {
   const shouldReduceMotion = useReducedMotion()
 
   return (
     <motion.div
-      className={className}
+      className={`max-w-[440px] mx-auto w-full ${className}`.trim()}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
