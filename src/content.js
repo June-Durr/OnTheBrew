@@ -116,7 +116,7 @@ export const content = {
     blocks: [
       { label: 'Grand Opening', detail: 'Now open in Stamford Town Center' },
       { label: 'Community Favorite', detail: '“Best new coffee shop in Stamford.”' },
-      { label: 'Family Roasted', detail: 'Beans sourced directly from Guatemala' },
+      { label: 'Family Roasted', detail: 'Sourced from Guatemala and brewed fresh in Stamford.' },
     ],
   },
   visit: {

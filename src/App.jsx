@@ -12,6 +12,7 @@ import Visit from './components/Visit'
 import Footer from './components/Footer'
 import MenuPage from './pages/MenuPage'
 import SmoothScroll from './components/SmoothScroll'
+import ScrollManager from './components/ScrollManager'
 
 function LandingPage() {
   return (
@@ -25,8 +26,8 @@ function LandingPage() {
         <Menu />
         <Brewmobile />
         <PressBand />
-        <Proof />
         <Visit />
+        <Proof />
       </main>
       <Footer />
     </>
@@ -37,6 +38,7 @@ function App() {
   return (
     <div className="w-full max-w-none">
       <SmoothScroll />
+      <ScrollManager />
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/menu" element={<MenuPage />} />

@@ -39,7 +39,11 @@ export default function Visit() {
         </div>
 
         <div className="flex flex-col gap-3">
-          <Button variant="primary" href="#">
+          <Button
+            variant="primary"
+            href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(content.visit.address)}`}
+            external
+          >
             {content.visit.cta}
           </Button>
         </div>
@@ -57,7 +61,23 @@ export default function Visit() {
           />
         </div>
 
-        <Placeholder label="[ Floor Plan ]" height="h-40" />
+        <div className="space-y-3">
+          <p className="font-sans text-xs uppercase tracking-widest text-brand-roast">Find Us on Level 3</p>
+          <div className="w-full overflow-hidden rounded-2xl border border-brand-line">
+            <picture>
+              <source srcSet="/images/location/stamford-town-center-level-3.webp" type="image/webp" />
+              <img
+                src="/images/location/stamford-town-center-level-3.png"
+                alt="Stamford Town Center Level 3 map showing On The Brew Coffee near the parking garage."
+                width={2400}
+                height={1792}
+                loading="lazy"
+                decoding="async"
+                className="h-auto w-full object-contain"
+              />
+            </picture>
+          </div>
+        </div>
 
         <div>
           <h3 className="font-display font-bold uppercase text-xl text-brand-primary">{content.visit.videoHeading}</h3>

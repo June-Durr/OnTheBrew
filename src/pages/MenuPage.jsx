@@ -1,8 +1,38 @@
-import { useEffect } from 'react'
+import { Fragment } from 'react'
 import { content } from '../content'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import Button from '../components/Button'
+import MenuTimeline from '../components/MenuTimeline'
+import MenuHero from '../components/MenuHero'
+
+const assetPath = (path) => `${import.meta.env.BASE_URL}${path}`
+
+// Short mobile-only labels so the pill nav never truncates mid-word. Full
+// category titles remain untouched inside the actual sections.
+const shortNavLabels = ['Coffee', 'Cultural', 'Tea', 'More']
+
+// Two alternating tones instead of four -- a quieter, more cohesive rhythm
+// than a different color per category.
+const sectionThemes = [
+  { bg: 'bg-brand-espresso', label: 'text-white', sub: 'text-brand-bg/70', numeral: 'text-brand-accent/80', rule: 'bg-brand-accent/60' },
+  { bg: 'bg-brand-bg', label: 'text-brand-primary', sub: 'text-brand-ink/60', numeral: 'text-brand-roast/60', rule: 'bg-brand-roast/40' },
+]
+
+function CategoryHeader({ category, index }) {
+  const theme = sectionThemes[index % sectionThemes.length]
+
+  return (
+    <div className={`-mx-5 px-6 py-10 text-center ${theme.bg}`}>
+      <div className="mx-auto w-full max-w-[440px]">
+        <span className={`font-display text-2xl font-bold ${theme.numeral}`}>0{index + 1}</span>
+        <div className={`mx-auto my-3 h-px w-12 ${theme.rule}`} />
+        <h2 className={`font-display text-2xl font-bold uppercase tracking-wide ${theme.label}`}>{category.label}</h2>
+        {category.subtitle && <p className={`mt-1 font-sans text-sm italic ${theme.sub}`}>{category.subtitle}</p>}
+      </div>
+    </div>
+  )
+}
 
 function MenuChapter({ category, index }) {
   if (!category.items.length) return null
@@ -11,27 +41,15 @@ function MenuChapter({ category, index }) {
 
   return (
     <section id={category.id} className="scroll-mt-24">
-      <div className="-mx-5 bg-brand-espresso px-6 py-5 text-center">
-        <div className="mx-auto w-full max-w-[440px]">
-          <h2 className="font-display font-bold uppercase text-2xl tracking-wide text-white">{category.label}</h2>
-          <div className="mx-auto my-2 h-px w-16 bg-brand-accent" />
-          {category.subtitle && (
-            <p className="font-sans text-sm italic text-brand-bg/70">{category.subtitle}</p>
-          )}
-        </div>
-      </div>
+      <CategoryHeader category={category} index={index} />
 
-      <div className="mx-auto grid w-full max-w-[440px] items-center gap-9 py-14 sm:py-16 md:max-w-6xl md:grid-cols-2 md:gap-16">
+      <div
+        className={`mx-auto grid w-full max-w-[440px] items-center gap-9 py-14 sm:py-16 md:max-w-6xl md:gap-16 ${
+          category.image ? 'md:grid-cols-2' : 'md:max-w-2xl'
+        }`}
+      >
         <div className={imageFirst ? 'md:order-2' : ''}>
-          <div className="relative ml-1 flex flex-col gap-6 border-l border-brand-roast/70 pl-7">
-            {category.items.map((item) => (
-              <article key={item.name} className="relative">
-                <span className="absolute -left-[1.98rem] top-2 h-2.5 w-2.5 rounded-full bg-brand-roast" />
-                <h3 className="font-display text-xl font-bold leading-tight text-brand-espresso sm:text-2xl">{item.name}</h3>
-                <p className="mt-1 text-base leading-snug text-brand-ink/75">{item.description}</p>
-              </article>
-            ))}
-          </div>
+          <MenuTimeline items={category.items} variant="chapter" />
         </div>
 
         {category.image && (
@@ -49,69 +67,86 @@ function MenuChapter({ category, index }) {
   )
 }
 
+// A full-bleed photographic moment breaking up the category rhythm -- the
+// real founders, reused from the homepage story, tying the menu back to
+// the same origin narrative rather than feeling like a disconnected list.
+function HeritageBand() {
+  return (
+    <>
+      {/* Mobile: narrow tall card -- the same tuned zoom/position used on the homepage story photo. */}
+      <div
+        role="img"
+        aria-label="Cecilia and Jonathan roasting and brewing by hand at On The Brew"
+        className="h-56 w-full bg-cover bg-no-repeat sm:h-72 md:hidden"
+        style={{
+          backgroundImage: `url(${assetPath('images/story/otb-founders-about.jpg')})`,
+          backgroundSize: '125% auto',
+          backgroundPosition: '40% 36%',
+        }}
+      />
+
+      {/* Desktop: a wide band -- cover crops by width alone here (no extra
+          zoom needed), so a plain cover fit keeps both faces in frame. */}
+      <div
+        role="img"
+        aria-label="Cecilia and Jonathan roasting and brewing by hand at On The Brew"
+        className="hidden h-[420px] w-full bg-cover bg-no-repeat md:block"
+        style={{
+          backgroundImage: `url(${assetPath('images/story/otb-founders-about.jpg')})`,
+          backgroundPosition: 'center 27%',
+        }}
+      />
+    </>
+  )
+}
+
+function hoursSummary(hours) {
+  const [first, ...rest] = hours
+  const sameRest = rest.every((entry) => entry.time === rest[0]?.time)
+
+  if (sameRest && rest.length) {
+    return `${rest[0].day}–${rest[rest.length - 1].day} ${rest[0].time} · ${first.day} ${first.time}`
+  }
+
+  return hours.map((entry) => `${entry.day} ${entry.time}`).join(' · ')
+}
+
 export default function MenuPage() {
   const categories = content.menu.categories.filter((category) => category.items.length)
-
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
 
   return (
     <>
       <Navbar />
       <main>
-        <header className="relative overflow-hidden bg-brand-primary px-5 py-16 text-white">
-          <div
-            className="pointer-events-none absolute -right-16 top-1/2 h-[140%] w-auto -translate-y-1/2 rotate-6 text-brand-accent opacity-10"
-            aria-hidden="true"
-          >
-            <svg
-              viewBox="0 0 220 480"
-              className="h-full w-auto"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M100 470 C 60 380 140 300 90 210 C 55 140 145 80 100 10" />
-              <path d="M85 430 Q65 424 51 406 Q71 410 85 430 Z" />
-              <path d="M70 380 Q90 374 104 356 Q84 360 70 380 Z" />
-              <path d="M95 330 Q75 324 61 306 Q81 310 95 330 Z" />
-              <path d="M115 280 Q135 274 149 256 Q129 260 115 280 Z" />
-              <path d="M95 230 Q75 224 61 206 Q81 210 95 230 Z" />
-              <path d="M115 180 Q135 174 149 156 Q129 160 115 180 Z" />
-              <path d="M130 130 Q110 124 96 106 Q116 110 130 130 Z" />
-              <path d="M115 80 Q135 74 149 56 Q129 60 115 80 Z" />
-              <circle cx="90" cy="425" r="6" />
-              <circle cx="100" cy="325" r="5" />
-              <circle cx="90" cy="225" r="6" />
-              <circle cx="125" cy="125" r="5" />
-            </svg>
-          </div>
-          <div className="relative mx-auto w-full max-w-[440px]">
-            <p className="mb-3 text-sm font-bold uppercase tracking-[0.24em] text-brand-accent">On The Brew Coffee Company</p>
-            <h1 className="max-w-3xl font-display font-bold text-5xl uppercase leading-[0.95] tracking-[0.03em] sm:text-7xl">{content.menu.title}</h1>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-white/90 sm:text-lg">{content.menu.introduction}</p>
-          </div>
-        </header>
+        <MenuHero />
 
-        <nav aria-label="Menu categories" className="border-b border-brand-line bg-brand-surface px-5">
-          <ul className="mx-auto flex w-full max-w-[440px] gap-2 overflow-x-auto py-3">
-            {categories.map((category) => (
+        <nav aria-label="Menu categories" className="sticky top-14 z-30 border-b border-brand-line bg-brand-surface px-5 shadow-sm md:top-20">
+          <ul className="mx-auto flex w-full max-w-[440px] gap-2.5 overflow-x-auto py-3 md:max-w-6xl">
+            {categories.map((category, index) => (
               <li key={category.id} className="shrink-0">
-                <a href={`#${category.id}`} className="flex min-h-11 items-center px-4 text-sm font-bold uppercase tracking-[0.12em] text-brand-primary hover:bg-brand-bg">
-                  {category.label}
+                <a
+                  href={`#${category.id}`}
+                  className="flex min-h-10 items-center rounded-full border border-brand-primary/25 bg-brand-bg px-4 text-sm font-bold uppercase tracking-[0.1em] text-brand-primary hover:border-brand-primary hover:bg-brand-primary hover:text-white"
+                >
+                  <span className="md:hidden">{shortNavLabels[index] ?? category.label}</span>
+                  <span className="hidden md:inline">{category.label}</span>
                 </a>
               </li>
             ))}
           </ul>
         </nav>
 
-        <div className="bg-brand-bg px-5">
-          <div className="mx-auto w-full max-w-[440px] divide-y divide-brand-roast/20 md:max-w-6xl">
+        <div className="bg-brand-bg">
+          <div className="mx-auto w-full">
             {categories.map((category, index) => (
-              <MenuChapter key={category.id} category={category} index={index} />
+              <Fragment key={category.id}>
+                <div className="px-5">
+                  <div className="mx-auto w-full max-w-[440px] md:max-w-6xl">
+                    <MenuChapter category={category} index={index} />
+                  </div>
+                </div>
+                {index === 0 && <HeritageBand />}
+              </Fragment>
             ))}
           </div>
         </div>
@@ -121,7 +156,7 @@ export default function MenuPage() {
             <p className="text-sm font-bold uppercase tracking-[0.22em] text-brand-accent">Come find your favorite</p>
             <h2 className="mt-3 font-display font-bold text-4xl uppercase">Visit On The Brew</h2>
             <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/85">{content.visit.address}</p>
-            <p className="mt-2 text-base text-white/85">{content.visit.hours}</p>
+            <p className="mt-2 text-base text-white/85">{hoursSummary(content.visit.hours)}</p>
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
               <div className="sm:flex-1">
                 <Button variant="light" href={content.visit.directionsUrl} external>

@@ -1,31 +1,26 @@
-import { motion, useReducedMotion } from 'motion/react'
 import { content } from '../content'
-import { fadeUp, stagger, reducedFadeUp } from '../lib/motion'
 import Reveal from './Reveal'
 import Button from './Button'
+import MenuTimeline from './MenuTimeline'
+
+const assetPath = (path) => `${import.meta.env.BASE_URL}${path}`
 
 export default function Menu() {
-  const shouldReduceMotion = useReducedMotion()
-  const cardVariants = shouldReduceMotion ? reducedFadeUp : fadeUp
   const featuredItems = content.menu.categories
     .flatMap((category) => category.items)
     .filter((item) => item.featured)
     .slice(0, 3)
-  const featuredImage = content.menu.categories.find((category) => category.image)
 
   return (
     <section id="menu" className="overflow-hidden bg-brand-bg px-5 py-16">
       <Reveal className="grid items-center gap-10 md:max-w-6xl md:grid-cols-2 md:gap-16">
-        <div className="relative min-h-80" aria-hidden={!featuredImage}>
-          <div className="absolute left-2 top-4 h-52 w-52 rounded-full bg-brand-accent/20" />
-          {featuredImage && (
-            <img
-              src={featuredImage.image}
-              alt={featuredImage.imageAlt}
-              className="relative mx-auto h-80 w-full max-w-xs object-contain drop-shadow-[0_24px_24px_rgba(58,32,24,0.18)]"
-            />
-          )}
-          <span className="absolute bottom-3 right-0 font-display text-6xl text-brand-primary/10">OTB</span>
+        <div className="relative min-h-80" aria-hidden="true">
+          <div className="absolute inset-x-8 bottom-4 h-32 rounded-full bg-brand-roast/15 blur-2xl" />
+          <img
+            src={assetPath('images/hero/otb-iced.png')}
+            alt=""
+            className="relative mx-auto h-80 w-full max-w-[230px] object-contain drop-shadow-[0_24px_24px_rgba(58,32,24,0.18)]"
+          />
         </div>
 
         <div>
@@ -35,21 +30,9 @@ export default function Menu() {
           </h2>
           <p className="mt-4 max-w-xl text-base leading-relaxed font-sans text-brand-ink">{content.menu.introduction}</p>
 
-          <motion.div
-            className="relative my-8 border-l border-brand-roast/60 pl-7"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={stagger}
-          >
-            {featuredItems.map((item) => (
-              <motion.article key={item.name} className="relative pb-6 last:pb-0" variants={cardVariants}>
-                <span className="absolute -left-[1.98rem] top-2 h-2.5 w-2.5 rounded-full bg-brand-roast" />
-                <h3 className="font-display font-bold uppercase text-lg text-brand-primary">{item.name}</h3>
-                <p className="font-sans text-sm text-brand-ink/70">{item.description}</p>
-              </motion.article>
-            ))}
-          </motion.div>
+          <div className="my-8">
+            <MenuTimeline items={featuredItems} variant="preview" animated />
+          </div>
 
           <Button variant="primary" href="/menu">
             View full menu

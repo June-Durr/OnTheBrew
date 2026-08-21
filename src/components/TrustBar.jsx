@@ -3,55 +3,37 @@ import { content } from '../content'
 import { fadeUp, stagger, reducedFadeUp } from '../lib/motion'
 import Reveal from './Reveal'
 
-const iconProps = {
-  width: 48,
-  height: 48,
-  viewBox: '0 0 48 48',
-  fill: 'none',
-  stroke: 'currentColor',
-  strokeWidth: 1.5,
-  strokeLinecap: 'round',
-  strokeLinejoin: 'round',
-  className: 'text-brand-accent',
-}
-
-const icons = {
-  sprig: (
-    <svg {...iconProps}>
-      <path d="M24 40V20" />
-      <path d="M24 26c0-6 6-9 11-8-1 6-5 9-11 8Z" />
-      <path d="M24 20c0-6-6-9-11-8 1 6 5 9 11 8Z" />
-      <circle cx="24" cy="12" r="4" />
-    </svg>
-  ),
-  mountain: (
-    <svg {...iconProps}>
-      <circle cx="33" cy="12" r="3" />
-      <path d="M4 36 16 18l6 8 4-5 14 15Z" />
-    </svg>
-  ),
-  pin: (
-    <svg {...iconProps}>
-      <path d="M24 42s12-11.5 12-20a12 12 0 1 0-24 0c0 8.5 12 20 12 20Z" />
-      <circle cx="24" cy="21" r="4" />
-    </svg>
-  ),
-}
+const assetPath = (path) => `${import.meta.env.BASE_URL}${path}`
 
 export default function TrustBar() {
   const shouldReduceMotion = useReducedMotion()
-  const blockVariants = shouldReduceMotion ? reducedFadeUp : fadeUp
+  const rowVariants = shouldReduceMotion ? reducedFadeUp : fadeUp
+  const [lead, ...supporting] = content.trustBar
 
   return (
     <section className="w-full bg-brand-navy px-6 py-16">
-      <Reveal className="flex flex-col items-center gap-12 text-center" variants={stagger}>
-        {content.trustBar.map((item) => (
-          <motion.div key={item.heading} className="flex flex-col items-center gap-3" variants={blockVariants}>
-            {icons[item.icon]}
-            <h3 className="font-display font-bold uppercase text-white text-lg tracking-wide">{item.heading}</h3>
-            <p className="font-sans text-brand-bg/70 text-sm">{item.body}</p>
-          </motion.div>
-        ))}
+      <Reveal variants={stagger}>
+        <motion.div className="flex flex-col items-center gap-4 text-center" variants={rowVariants}>
+          <img
+            src={assetPath('branding/otb-botanical-mark-cream-2048.png')}
+            alt=""
+            aria-hidden="true"
+            className="h-14 w-auto object-contain"
+          />
+          <h2 className="max-w-xs font-display text-2xl font-bold uppercase leading-tight tracking-wide text-white">
+            {lead.heading}
+          </h2>
+          <p className="text-sm text-brand-bg/70">{lead.body}</p>
+        </motion.div>
+
+        <div className="mt-10 divide-y divide-white/10 border-t border-white/10">
+          {supporting.map((item) => (
+            <motion.div key={item.heading} className="py-5 text-left" variants={rowVariants}>
+              <h3 className="font-display text-sm font-bold uppercase tracking-wide text-white">{item.heading}</h3>
+              <p className="mt-0.5 text-xs text-brand-bg/60">{item.body}</p>
+            </motion.div>
+          ))}
+        </div>
       </Reveal>
     </section>
   )
