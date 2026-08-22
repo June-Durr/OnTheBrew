@@ -114,9 +114,9 @@ export const content = {
   proof: {
     heading: 'Loved From the Start',
     blocks: [
-      { label: 'Grand Opening', detail: 'Now open in Stamford Town Center' },
-      { label: 'Community Favorite', detail: '“Best new coffee shop in Stamford.”' },
-      { label: 'Family Roasted', detail: 'Sourced from Guatemala and brewed fresh in Stamford.' },
+      { label: 'Grand Opening', detail: 'Stamford Town Center' },
+      { label: 'Community Favorite', detail: 'Stamford’s neighborhood coffee ritual' },
+      { label: 'Family Roasted', detail: 'Guatemala → Stamford' },
     ],
   },
   visit: {
